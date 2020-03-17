@@ -35,9 +35,9 @@ local class = {
 -- local MyClass = class("MyClass", MyBaseClass)
 function class.new(name, ...)
   if (...) then
-    return factory.newClass(name, ...)
+    return factory(name, ...)
   end
-  return factory.newClass(name, class.BaseObject)
+  return factory(name, class.BaseObject)
 end
 
 --- Get the type of the specified value.
@@ -77,9 +77,9 @@ end
 -- @usage
 -- class.isClass(class("MyClass")) --> true
 -- class.isClass(123) --> false
---
--- @function isClass
-class.isClass = factory.isClass
+function class.isClass(value)
+  return type(value) == "table" and rawget(value, "_class") ~= nil
+end
 
 --- Determine if the given class or instance is derived from a certain type.
 --

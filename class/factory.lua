@@ -4,12 +4,6 @@
 -- @copyright 2020
 -- @license https://opensource.org/licenses/MIT
 
-local factory = {}
-
---- Unique key to identify classes.
--- @local
-local ClassMarkerKey = {}
-
 --- Parent keys excluded from inheritance.
 -- @local
 local ignoredParentKeys = {
@@ -21,12 +15,10 @@ local ignoredParentKeys = {
 --- Inherit methods and attributes from a parent class to a child class.
 -- @param child The child class
 -- @param parent The parent class
--- @raise if parent is not a valid class
+-- @raise if parent is not a table
 -- @local
 local function inherit(child, parent)
-  if not factory.isClass(parent) then
-    error("Parent is not a valid class")
-  end
+  assert(type(parent) == "table", "Parent must be a table")
 
   child._parentClasses[parent] = true
   child._parentClasses[parent._typename] = true
@@ -73,15 +65,13 @@ end
 --
 -- @return The created class
 -- @raise if no typename was specified
-function factory.newClass(typename, ...)
+return function(typename, ...)
   if type(typename) ~= "string" or typename == "" then
     error("Please name your class")
   end
 
   local parents = {...}
   local newClass = setmetatable({
-    -- This is used to distinguish classes from other tables.
-    [ClassMarkerKey] = true,
     -- Inherited classes and typenames.
     _parentClasses = {},
     -- Property getters and setters.
@@ -112,13 +102,3 @@ function factory.newClass(typename, ...)
   
   return newClass
 end
-
---- Determine if the given value is a class.
---
--- @param value The value
--- @return True if the value is a class, false otherwise
-function factory.isClass(value)
-  return type(value) == "table" and rawget(value, ClassMarkerKey) == true
-end
-
-return factory

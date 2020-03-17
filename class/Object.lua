@@ -10,7 +10,7 @@ local BASE = (...):gsub("%.Object$", "")
 local factory = require(BASE .. ".factory")
 local BaseObject = require(BASE .. ".BaseObject")
 
-local Object = factory.newClass("Object", BaseObject)
+local Object = factory("Object", BaseObject)
 
 --- Custom __newindex class metamethod that automatically creates properties from
 -- get* and set* methods that get added to a class.

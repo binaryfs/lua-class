@@ -7,7 +7,7 @@
 local BASE = (...):gsub("%.BaseObject$", "")
 local factory = require(BASE .. ".factory")
 
-local BaseObject = factory.newClass("BaseObject")
+local BaseObject = factory("BaseObject")
 
 --- Initialize the object.
 --
