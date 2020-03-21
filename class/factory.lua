@@ -86,9 +86,11 @@ return function(typename, ...)
     inherit(newClass, parents[i])
   end
 
-  rawset(newClass, "__index", rawget(newClass, "__index") or newClass)
   rawset(newClass, "_class", newClass)
   rawset(newClass, "_typename", typename)
+  if type(rawget(newClass, "__index")) ~= "function" then
+    rawset(newClass, "__index", newClass)
+  end
   
   -- Define the constructor.
   rawset(newClass, "new", function(...)
