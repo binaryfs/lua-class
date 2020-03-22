@@ -1,4 +1,4 @@
---- Lua classes with multiple inheritance and properties.
+--- Lua classes with multiple inheritance and C#-like properties.
 -- @module class
 -- @author Fabian Staacke
 -- @copyright 2020
@@ -9,8 +9,8 @@ local factory = require(BASE .. ".factory")
 
 local class = {
   _NAME = "class",
-  _DESCRIPTION = "Lua classes with multiple inheritance and properties",
-  _VERSION = "0.6.0",
+  _DESCRIPTION = "Lua classes with multiple inheritance and and C#-like properties",
+  _VERSION = "1.0.0",
   _URL = "https://github.com/binaryfs/lua-class",
   _LICENSE = "MIT License",
   _COPYRIGHT = "Copyright (c) 2020 Fabian Staacke",
